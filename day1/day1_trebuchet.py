@@ -32,10 +32,12 @@ def valid_digit(string: str, early_flag: int) -> int:
 
     for digit in digits_set:
         if digit in string:
+            # look for first occurence of the digit 
             if early_flag:
                 curr_idx = string.find(digit)
                 if found_idx > curr_idx:
                     found_idx, found_digit = curr_idx, digit
+            # look for last occurence of the digit
             else:
                 curr_idx = string.rfind(digit)
                 if found_idx < curr_idx:
@@ -47,6 +49,7 @@ def valid_digit(string: str, early_flag: int) -> int:
 def part2_retrieve_calibrations(lines: List[str]):
     digits = '1|2|3|4|5|6|7|8|9'
 
+    # use regex to split line with digits
     chars = [re.split(digits, line) for line in lines]
     nums = [list(filter(lambda line: line.isnumeric(), line)) for line in lines]
 
